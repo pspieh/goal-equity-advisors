@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Season Cost Calculator | Goal Equity Advisors</title>
+  <meta name="description" content="Model the full youth soccer season commitment beyond the initial club deposit.">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#08251c] min-h-screen px-4">
+
+<!-- Container matching Goal Equity Advisors aesthetic -->
+<div class="max-w-xl mx-auto my-8 p-6 bg-[#0e382b] text-white rounded-lg shadow-xl font-sans">
+  <div class="border-b border-[#2d5c4b] pb-4 mb-6">
+    <span class="text-xs uppercase tracking-wider text-[#d4af37] font-semibold">01 / Cost Modeler</span>
+    <h2 class="text-2xl font-bold tracking-tight text-white mt-1">Season Cost Calculator</h2>
+    <p class="text-sm text-gray-300 mt-1">Model the full commitment beyond the initial club deposit.</p>
+  </div>
+
+  <div class="space-y-5">
+    <!-- Slider: Base Registration -->
+    <div>
+      <div class="flex justify-between text-sm mb-1">
+        <label for="baseDues" class="text-gray-200">Base Registration / Club Dues</label>
+        <span id="baseDuesVal" class="font-bold text-[#d4af37]">$2,400</span>
+      </div>
+      <input type="range" id="baseDues" min="1000" max="4500" step="50" value="2400"
+        class="w-full h-1.5 bg-[#1b4e3d] rounded-lg appearance-none cursor-pointer accent-[#d4af37]">
+    </div>
+
+    <!-- Dropdown: Uniform Kit Year -->
+    <div>
+      <label for="uniformCycle" class="block text-sm text-gray-200 mb-1">Uniform Package Cycle</label>
+      <select id="uniformCycle" class="w-full bg-[#164535] border border-[#2d5c4b] rounded p-2.5 text-sm text-white focus:outline-none focus:border-[#d4af37]">
+        <option value="450">New Uniform Cycle (Full Kit, Warmups, Bag: +$450)</option>
+        <option value="120">Returning Player (Replacement socks, training jersey: +$120)</option>
+        <option value="0">Zero Uniform Fee (Using existing gear: $0)</option>
+      </select>
+    </div>
+
+    <!-- Slider: Travel Tournaments -->
+    <div>
+      <div class="flex justify-between text-sm mb-1">
+        <label for="tournaments" class="text-gray-200">Out-of-Area Travel Tournaments</label>
+        <span id="tournamentsVal" class="font-bold text-[#d4af37]">3 events</span>
+      </div>
+      <input type="range" id="tournaments" min="0" max="6" step="1" value="3"
+        class="w-full h-1.5 bg-[#1b4e3d] rounded-lg appearance-none cursor-pointer accent-[#d4af37]">
+    </div>
+
+    <!-- Toggle: Stay-to-Play Hotel Mandate -->
+    <div class="flex items-start gap-3 p-3 bg-[#134233] rounded border border-[#235342]">
+      <input type="checkbox" id="stayToPlay" checked class="mt-1 w-4 h-4 rounded accent-[#d4af37]">
+      <label for="stayToPlay" class="text-xs text-gray-300">
+        <strong class="text-white block">Stay-to-Play Mandate Applied</strong>
+        Enforces required tournament hotel booking blocks (~$240/night average + fees).
+      </label>
+    </div>
+
+    <!-- Live Totals Comparison Box -->
+    <div class="pt-4 border-t border-[#2d5c4b] grid grid-cols-2 gap-4" aria-live="polite">
+      <div class="p-3 bg-[#134233] rounded">
+        <span class="block text-xs uppercase tracking-wide text-gray-400">Advertised Dues</span>
+        <span id="displayBase" class="text-xl font-bold text-gray-200 mt-1 block">$2,400</span>
+      </div>
+      <div class="p-3 bg-[#1a4d3c] border border-[#d4af37]/40 rounded">
+        <span class="block text-xs uppercase tracking-wide text-[#d4af37]">True Out-of-Pocket</span>
+        <span id="displayTotal" class="text-2xl font-black text-white mt-1 block">$5,550</span>
+      </div>
+    </div>
+
+    <!-- Share / Summary CTA -->
+    <button id="copySummaryBtn" type="button" class="w-full py-2.5 px-4 bg-[#d4af37] text-[#0e382b] font-bold text-sm rounded hover:bg-[#e2bd44] transition-colors">
+      Copy Calculation Summary
+    </button>
+  </div>
+</div>
+
+<script>
+  const baseDues = document.getElementById('baseDues');
+  const uniformCycle = document.getElementById('uniformCycle');
+  const tournaments = document.getElementById('tournaments');
+  const stayToPlay = document.getElementById('stayToPlay');
+
+  const baseDuesVal = document.getElementById('baseDuesVal');
+  const tournamentsVal = document.getElementById('tournamentsVal');
+  const displayBase = document.getElementById('displayBase');
+  const displayTotal = document.getElementById('displayTotal');
+  const copyBtn = document.getElementById('copySummaryBtn');
+
+  // Average tournament travel per event: $220 entry surcharge share + $200 food/gas
+  const TRAVEL_PER_TOURNEY = 420;
+  // Stay-to-play adds ~2 nights @ $240/night
+  const HOTEL_PER_TOURNEY = 2 * 240;
+
+  const fmt = n => `$${n.toLocaleString('en-US')}`;
+
+  function calculate() {
+    const base = parseInt(baseDues.value, 10);
+    const uniform = parseInt(uniformCycle.value, 10);
+    const tourneyCount = parseInt(tournaments.value, 10);
+
+    const costPerTourney = TRAVEL_PER_TOURNEY + (stayToPlay.checked ? HOTEL_PER_TOURNEY : 0);
+    const tourneyTotal = tourneyCount * costPerTourney;
+
+    const grandTotal = base + uniform + tourneyTotal;
+
+    baseDuesVal.textContent = fmt(base);
+    tournamentsVal.textContent = `${tourneyCount} event${tourneyCount === 1 ? '' : 's'}`;
+    displayBase.textContent = fmt(base);
+    displayTotal.textContent = fmt(grandTotal);
+
+    return { base, uniform, tourneyCount, tourneyTotal, grandTotal };
+  }
+
+  [baseDues, uniformCycle, tournaments, stayToPlay].forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  function flashButton(text) {
+    copyBtn.textContent = text;
+    setTimeout(() => copyBtn.textContent = 'Copy Calculation Summary', 2000);
+  }
+
+  copyBtn.addEventListener('click', async () => {
+    const r = calculate();
+    const summary = [
+      'Goal Equity Season Estimate:',
+      `- Base Dues: ${fmt(r.base)}`,
+      `- Uniform Package: ${fmt(r.uniform)}`,
+      `- Travel Tournaments (${r.tourneyCount}${stayToPlay.checked ? ', stay-to-play' : ''}): ${fmt(r.tourneyTotal)}`,
+      `- Est. True Out-of-Pocket: ${fmt(r.grandTotal)}`,
+      'Modeled via goalequityadvisors.org'
+    ].join('\n');
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      flashButton('Summary Copied to Clipboard!');
+    } catch (err) {
+      flashButton('Copy failed — please copy manually');
+    }
+  });
+
+  calculate();
+</script>
+</body>
+</html>
