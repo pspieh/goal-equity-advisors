@@ -32,9 +32,7 @@
     <div>
       <label for="uniformCycle" class="block text-sm text-gray-200 mb-1">Uniform Package Cycle</label>
       <select id="uniformCycle" class="w-full bg-[#164535] border border-[#2d5c4b] rounded p-2.5 text-sm text-white focus:outline-none focus:border-[#d4af37]">
-        <option value="450">New Uniform Cycle (Full Kit, Warmups, Bag: +$450)</option>
-        <option value="120">Returning Player (Replacement socks, training jersey: +$120)</option>
-        <option value="0">Zero Uniform Fee (Using existing gear: $0)</option>
+        <!-- Options are filled in from COSTS.uniformOptions in the script below -->
       </select>
     </div>
 
@@ -53,7 +51,7 @@
       <input type="checkbox" id="stayToPlay" checked class="mt-1 w-4 h-4 rounded accent-[#d4af37]">
       <label for="stayToPlay" class="text-xs text-gray-300">
         <strong class="text-white block">Stay-to-Play Mandate Applied</strong>
-        Enforces required tournament hotel booking blocks (~$240/night average + fees).
+        Enforces required tournament hotel booking blocks (~<span id="hotelRate">$240</span>/night average + fees).
       </label>
     </div>
 
@@ -77,6 +75,37 @@
 </div>
 
 <script>
+  // ================================================================
+  //  EDIT PRICES HERE. These numbers drive the whole calculator.
+  //  Change a number, save, and the page updates. No other edits needed.
+  // ================================================================
+  const COSTS = {
+    // Club dues slider (dollars)
+    duesMin: 1000,
+    duesMax: 4500,
+    duesDefault: 2400,
+
+    // Uniform dropdown: label shown to parents + price in dollars
+    uniformOptions: [
+      { label: 'New Uniform Cycle (Full Kit, Warmups, Bag)', price: 450 },
+      { label: 'Returning Player (Replacement socks, training jersey)', price: 120 },
+      { label: 'Zero Uniform Fee (Using existing gear)', price: 0 },
+    ],
+
+    // Tournaments slider
+    tournamentsMax: 6,
+    tournamentsDefault: 3,
+
+    // Per tournament: entry surcharge share + food/gas
+    entryPerTournament: 220,
+    foodGasPerTournament: 200,
+
+    // Stay-to-play hotel requirement
+    hotelPerNight: 240,
+    hotelNightsPerTournament: 2,
+  };
+  // ================================================================
+
   const baseDues = document.getElementById('baseDues');
   const uniformCycle = document.getElementById('uniformCycle');
   const tournaments = document.getElementById('tournaments');
@@ -88,12 +117,19 @@
   const displayTotal = document.getElementById('displayTotal');
   const copyBtn = document.getElementById('copySummaryBtn');
 
-  // Average tournament travel per event: $220 entry surcharge share + $200 food/gas
-  const TRAVEL_PER_TOURNEY = 420;
-  // Stay-to-play adds ~2 nights @ $240/night
-  const HOTEL_PER_TOURNEY = 2 * 240;
+  const TRAVEL_PER_TOURNEY = COSTS.entryPerTournament + COSTS.foodGasPerTournament;
+  const HOTEL_PER_TOURNEY = COSTS.hotelNightsPerTournament * COSTS.hotelPerNight;
 
   const fmt = n => `$${n.toLocaleString('en-US')}`;
+
+  // Apply COSTS to the controls
+  Object.assign(baseDues, { min: COSTS.duesMin, max: COSTS.duesMax, value: COSTS.duesDefault });
+  Object.assign(tournaments, { max: COSTS.tournamentsMax, value: COSTS.tournamentsDefault });
+  uniformCycle.innerHTML = '';
+  COSTS.uniformOptions.forEach(({ label, price }) => {
+    uniformCycle.add(new Option(`${label}: ${price ? '+' : ''}${fmt(price)}`, price));
+  });
+  document.getElementById('hotelRate').textContent = fmt(COSTS.hotelPerNight);
 
   function calculate() {
     const base = parseInt(baseDues.value, 10);
