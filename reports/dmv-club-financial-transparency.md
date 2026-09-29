@@ -2,10 +2,10 @@
 
 _Research reflects 2025–26 season information. Structured data: [`data/dmv-clubs.csv`](../data/dmv-clubs.csv) and [`data/dmv-club-990s.csv`](../data/dmv-club-990s.csv)._
 
-Nonprofit status is the best single predictor of financial transparency among the DMV's elite youth soccer clubs. About 16 of the 25 clubs selected here have a findable IRS Form 990 on ProPublica Nonprofit Explorer, with revenue, expense and named executive-pay data, while the for-profit, pro-affiliated and alliance-branded programs (D.C. United Academy, DC Power FC, The St. James FC, VA Revolution/Loudoun United, Achilles FC, Northern Virginia Alliance, Virginia Development Academy, Fairfax Virginia Union) publish little or no entity-level financial data. Fee schedules and financial-aid policies are common. Aid outcomes (how many players get aid, and how much) are rare: only Alexandria Soccer Association and DC Soccer Club (Stoddert) publish aid dollar totals, and no club publishes the share of elite-tier players on aid.
+Nonprofit status is the best single predictor of financial transparency among the DMV's elite youth soccer clubs. Fourteen of the 25 clubs selected here have a current IRS Form 990 on ProPublica Nonprofit Explorer, with revenue, expense and named executive-pay data, while the for-profit, pro-affiliated and alliance-branded programs (D.C. United Academy, DC Power FC, The St. James FC, VA Revolution/Loudoun United, Achilles FC, Northern Virginia Alliance, Virginia Development Academy, Fairfax Virginia Union) publish little or no entity-level financial data. Fee schedules and financial-aid policies are common. Aid outcomes (how many players get aid, and how much) are rare: only Alexandria Soccer Association and DC Soccer Club (Stoddert) publish aid dollar totals, and no club publishes the share of elite-tier players on aid.
 
 ## TL;DR
-- **990s are good for 16 clubs; for-profit and alliance programs are largely opaque.** ProPublica shows current (FY2024–FY2025) 990s for the big community nonprofits: Arlington ($10.89M revenue), Loudoun ($7.84M), Alexandria ($7.29M), Bethesda ($6.56M), SYC ($5.23M), Stoddert/DC Soccer Club ($4.87M) and others. Across these clubs, 89–94% of revenue is program-service fees, so fees drive the budget and donations are marginal (3–7.5%).
+- **990s are good for 14 clubs; for-profit and alliance programs are largely opaque.** ProPublica shows current (FY2024–FY2025) 990s for the big community nonprofits: Arlington ($10.89M revenue), Loudoun ($7.84M), Alexandria ($7.29M), Bethesda ($6.56M), SYC ($5.23M), Stoddert/DC Soccer Club ($4.87M) and others. Across these clubs, 89–94% of revenue is program-service fees, so fees drive the budget and donations are marginal (3–7.5%).
 - **Fee schedules and aid policies are usually public, but aid outcomes are not.** Arlington publishes a tiered fee and aid grid (club fees of $2,050–$3,000, maximum aid 60%). Loudoun publishes a $65,000 family-income cutoff. SYC and VDA publish percentage or case-by-case rules. Only Alexandria and DC Soccer Club ($250,000–$350,000 per year) publish aid totals, and neither breaks them out for elite teams. Alexandria's Spring2ACTion page says "Last year ASA supported over 2,000 participants with $715,000 in financial aid support," but its other published figures differ.
 - **A database is feasible but needs three layers of data.** 990 data is machine-readable and cheap to collect. Fee and aid data has to be scraped from club websites each season and is often incomplete (uniforms, travel and team fees are excluded). Data on for-profits and alliances needs state registry lookups plus direct outreach. Expect about 60–65% coverage from public sources alone.
 
@@ -181,7 +181,7 @@ Note the practical limit: state registries in these jurisdictions disclose entit
 ## Data Gaps and Feasibility of a Goal Equity Advisors Database
 
 **Feasible with high confidence (Tier 1, low cost):**
-- 990 financials for about 16 nonprofits via ProPublica's API/XML or IRS TEOS: revenue, fee share, contributions, compensation, net assets and deficits. This is annual and fully reproducible.
+- 990 financials for 14 nonprofits via ProPublica's API/XML or IRS TEOS: revenue, fee share, contributions, compensation, net assets and deficits. This is annual and fully reproducible.
 
 **Feasible with effort (Tier 2, seasonal scraping and manual coding):**
 - Fee schedules and aid rules. Expect inconsistent formats (PDFs, PlayMetrics/LeagueApps checkout-only disclosures), dated pages (Arlington's grid is 2023–24), and missing team, uniform and travel costs.
@@ -196,7 +196,7 @@ Note the practical limit: state registries in these jurisdictions disclose entit
 - Value of public field allocations. This could be approached via county Parks and Recreation allocation records or FOIA requests, which is an untested but promising route.
 
 **Recommendations**
-1. Launch with a 990 panel of the 16 filers and publish standardized ratios: fee share of revenue, aid-proxy (where Schedule data allow), executive compensation per $1M of revenue, and reserve months.
+1. Launch with a 990 panel of the 14 filers and publish standardized ratios: fee share of revenue, aid-proxy (where Schedule data allow), executive compensation per $1M of revenue, and reserve months.
 2. Create a uniform "Access Disclosure" request covering aid dollars, recipients by tier, deposit rules, team-fee ranges, and whether aid covers team fees and uniforms. Send it to all 25 clubs, and score clubs on response. Non-response is itself a transparency metric.
 3. Treat alliances (NVA, VDA, FVU) as the unit families experience, and request program-level P&Ls from parent clubs.
 4. Pull SDAT, SCC and DLCP records for all for-profit and unverified entities before publication.
