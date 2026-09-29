@@ -1,0 +1,26 @@
+id,club,jurisdiction,entity_type,ein,form_990,latest_fy_end,latest_revenue,fee_schedule_public,aid_policy_public,aid_outcome_public,why_included
+1,D.C. United Academy,"DC / Leesburg, VA",for-profit (unverified),,no,,,n/a,n/a,n/a,MLS club academy (MLS NEXT)
+2,DC Power FC,DC,for-profit (unverified),,no,,,n/a,n/a,n/a,USL Super League pro club signing DMV youth to academy contracts
+3,DC Soccer Club (Stoddert Soccer League),DC,501(c)(3),52-1340436,yes,2025-07,4870669,partial,yes,yes,Largest DC nonprofit; MLS NEXT Academy Division from 2026-27; ECNL RL
+4,Arlington Soccer Association,"Arlington, VA",501(c)(3),23-7284150,yes,2025-06,10890449,yes,yes,no,"ECNL Boys/Girls, MLS NEXT; largest revenue in set"
+5,McLean Youth Soccer,"McLean, VA",501(c)(3),80-0015698,yes,2025-06,3579252,not_verified,not_verified,no,"MLS NEXT, Girls Academy"
+6,Alexandria Soccer Association,"Alexandria, VA",501(c)(3),54-0902413,yes,2025-06,7286737,partial,yes,yes,MLS NEXT; large community club
+7,Loudoun Soccer (Loudoun Youth Soccer Assn.),"Leesburg, VA",501(c)(3),54-1076172,yes,2025-05,7842651,yes,yes,no,"MLS NEXT 2, Girls Academy; NVA partner"
+8,Northern Virginia Alliance (NVA),"Loudoun/Fairfax, VA",alliance (no EIN found),,no,,,not_verified,partial,no,"ECNL, MLS NEXT, Girls Academy alliance"
+9,Great Falls Reston SC,"Great Falls, VA",501(c)(3),51-0226159,yes,2024-12,2774491,not_verified,not_verified,no,NVA founding partner
+10,Virginia Development Academy (VDA),"Woodbridge, VA",alliance (no EIN found),,no,,,yes,yes,no,"ECNL Boys/Girls, USL Youth"
+11,Prince William Soccer Inc.,"Woodbridge, VA",501(c)(3),54-1101179,yes,2025-06,4641062,not_verified,not_verified,no,VDA founding partner
+12,Fairfax Virginia Union (successor to Fairfax BRAVE),"Fairfax, VA",alliance (no EIN found),,no,,,yes,yes,no,ECNL national club
+13,Braddock Road Youth Club,"Springfield, VA",501(c)(3),54-1015722,yes,2024-12,3139608,not_verified,not_verified,no,FVU/BRAVE founding partner
+14,Vienna Youth Soccer,"Vienna, VA",501(c)(3),54-1004923,yes,2025-06,3868248,not_verified,not_verified,no,FVU/BRAVE founding partner
+15,Lee Mount Vernon Sports Club,"Alexandria/Fairfax, VA",nonprofit (990 not checked),,not_checked,,,yes,yes,no,FVU partner
+16,Springfield/South County Youth Club (SYC),"Springfield, VA",501(c)(3),54-0938972,yes,2025-06,5229193,not_verified,yes,no,"Girls Academy, GA Aspire; MLS NEXT 2 listing"
+17,The St. James FC,"Springfield, VA / Bethesda, MD",for-profit (unverified),,no,,,no,no,no,MLS NEXT; for-profit sports complex operator
+18,VA Revolution / Loudoun United FC,"Leesburg, VA",private pro club; legacy 501(c)(3) stale,84-2902851,stale,2022,16967,partial,partial,no,"MLS NEXT, Girls Academy; merged with USL Championship club"
+19,Bethesda Soccer Club,"Bethesda/N. Potomac, MD",501(c)(3),52-1223186,yes,2025-08,6564798,not_verified,yes,no,"MLS NEXT, ECNL"
+20,Achilles FC (+ Achilles FC Foundation),"Silver Spring, MD",not verified (Foundation described as 501(c)(3)),,not_found,,,no,partial,no,MLS NEXT charter club
+21,Montgomery Soccer Inc. (Maryland Rush Montgomery),"Derwood, MD",501(c)(3),23-7327918,yes,2024-12,4488877,not_verified,not_verified,no,Large Montgomery County club
+22,Maryland United FC,"Bowie/Annapolis, MD",501(c)(3),83-0574699,yes,2024-12,3591749,not_verified,not_verified,no,USL Youth; large PG/Anne Arundel club
+23,FC Frederick,"Frederick, MD",501(c)(3),61-1441486,yes,2025-06,3311564,not_verified,not_verified,no,Large Frederick County club
+24,Virginia Valor FC,"Chantilly, VA",not verified,,not_checked,,,not_verified,not_verified,no,NVA and FVU partner
+25,Liverpool FC IA Maryland,"Rockville, MD",not verified (likely licensed private operator),,not_checked,,,not_verified,not_verified,no,National Academy League; international-brand academy
