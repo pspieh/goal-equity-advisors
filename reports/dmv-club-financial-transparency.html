@@ -1,0 +1,763 @@
+<title>DMV Club Financial Transparency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+/* Layout: single reading column, wide tables scroll in their own frames. Matches the Open Books Standard page. */
+:root{
+  --ground:#f7f5f0; --paper:#ffffff; --ink:#1c1f1c; --muted:#5c625b; --rule:#d9d5cb;
+  --accent:#2b4d2f; --accent-soft:#e6eee6; --focus:#2b4d2f;
+  --display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#141714; --paper:#1c201c; --ink:#e9ebe6; --muted:#a3aaa1; --rule:#343a33;
+    --accent:#93c49b; --accent-soft:#1f2c21; --focus:#93c49b;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#141714; --paper:#1c201c; --ink:#e9ebe6; --muted:#a3aaa1; --rule:#343a33;
+  --accent:#93c49b; --accent-soft:#1f2c21; --focus:#93c49b;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.62;padding-inline:20px;padding-block:48px 96px}
+.wrap{max-width:820px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.9rem,5.4vw,2.7rem);letter-spacing:-.01em}
+h2{font-size:1.6rem;margin-top:64px;margin-bottom:16px;padding-top:24px;border-top:1px solid var(--rule)}
+h3{font-size:1.15rem;margin-top:36px;margin-bottom:12px;display:flex;align-items:baseline;gap:10px}
+h3 .code{font-family:var(--body);font-size:.85rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+p{margin:0 0 14px;max-width:68ch}
+p.label{margin-top:22px;margin-bottom:8px}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+strong{font-weight:600}
+ul,ol{margin:0 0 16px;padding-left:22px;max-width:68ch}
+li{margin-bottom:6px}
+li > ul{margin-top:6px}
+.eyebrow{color:var(--muted);font-size:.9rem;margin:0 0 10px}
+.lede{font-size:1.1rem;line-height:1.55;margin-top:18px;max-width:64ch}
+.control{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0 0;padding:0}
+.control div{background:var(--paper);padding:12px 14px}
+.control dt{font-size:.78rem;color:var(--muted);letter-spacing:.02em}
+.control dd{margin:2px 0 0;font-weight:500;font-variant-numeric:tabular-nums}
+.toc{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.95rem}
+.tablewrap{overflow-x:auto;margin:16px 0 24px;border:1px solid var(--rule);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--rule)}
+tr:last-child td{border-bottom:0}
+th{font-weight:600;font-size:.82rem;color:var(--muted);background:var(--ground)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td:first-child{font-weight:500}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);color:var(--muted);font-size:.9rem}
+@media (max-width:560px){body{font-size:16px}}
+</style>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Goal Equity Advisors · Research report</p>
+  <h1>Financial Transparency and Access Data for 25 Leading DMV Youth Soccer Clubs</h1>
+  <p class="lede">Nonprofit status is the best single predictor of financial transparency among the DMV's elite youth soccer clubs. Fourteen of the 25 clubs selected here have a current IRS Form 990 on ProPublica Nonprofit Explorer, with revenue, expense and named executive-pay data, while the for-profit, pro-affiliated and alliance-branded programs (D.C. United Academy, DC Power FC, The St. James FC, VA Revolution/Loudoun United, Achilles FC, Northern Virginia Alliance, Virginia Development Academy, Fairfax Virginia Union) publish little or no entity-level financial data. Fee schedules and financial-aid policies are common. Aid outcomes (how many players get aid, and how much) are rare: only Alexandria Soccer Association and DC Soccer Club (Stoddert) publish aid dollar totals, and no club publishes the share of elite-tier players on aid.</p>
+  <dl class="control">
+    <div><dt>Season covered</dt><dd>2025–26</dd></div>
+    <div><dt>Clubs and alliances</dt><dd>25</dd></div>
+    <div><dt>Current Form 990s</dt><dd>14</dd></div>
+    <div><dt>Publish aid totals</dt><dd>2</dd></div>
+    <div><dt>Updated</dt><dd>September 30, 2026</dd></div>
+  </dl>
+  <nav class="toc" aria-label="Contents"><a href="#tl-dr">Summary</a><a href="#how-the-25-clubs-were-selected">Selection</a><a href="#summary-table">Club table</a><a href="#key-findings">Findings</a><a href="#most-and-least-transparent">Rankings</a><a href="#data-gaps-and-feasibility-of-a-goal-equity-advisors-database">Database plan</a><a href="#caveats">Caveats</a></nav>
+</header>
+<main>
+<h2 id="tl-dr">TL;DR</h2>
+<ul>
+<li><strong>990s are good for 14 clubs; for-profit and alliance programs are largely opaque.</strong> ProPublica shows current (FY2024–FY2025) 990s for the big community nonprofits: Arlington ($10.89M revenue), Loudoun ($7.84M), Alexandria ($7.29M), Bethesda ($6.56M), SYC ($5.23M), Stoddert/DC Soccer Club ($4.87M) and others. At the three clubs where the split was extracted (Arlington, Bethesda, McLean), 88.8–90.7% of revenue is program-service fees, so fees drive the budget and donations are marginal (5.0–7.5%).</li>
+<li><strong>Fee schedules and aid policies are usually public, but aid outcomes are not.</strong> Arlington publishes a tiered fee and aid grid (club fees of $2,050–$3,000, maximum aid 60%). Loudoun publishes a $65,000 family-income cutoff. SYC and VDA publish percentage or case-by-case rules. Only Alexandria and DC Soccer Club ($250,000–$350,000 per year) publish aid totals, and neither breaks them out for elite teams. Alexandria's Spring2ACTion page says "Last year ASA supported over 2,000 participants with $715,000 in financial aid support," but its other published figures differ.</li>
+<li><strong>A database is feasible but needs three layers of data.</strong> 990 data is machine-readable and cheap to collect. Fee and aid data has to be scraped from club websites each season and is often incomplete (uniforms, travel and team fees are excluded). Data on for-profits and alliances needs state registry lookups plus direct outreach. Expect about 60–65% coverage from public sources alone.</li>
+</ul>
+<h2 id="how-the-25-clubs-were-selected">How the 25 Clubs Were Selected</h2>
+<p class="label"><strong>Definition used:</strong> A club qualifies if it is a DMV-based club (DC, Montgomery, Prince George's, Anne Arundel and Frederick counties in MD, and Northern Virginia) that meets at least one of these tests:</p>
+<ul>
+<li>holds a top-tier national platform membership in 2025–26 (MLS NEXT Homegrown/Academy/MLS NEXT 2, ECNL/ECNL Boys, Girls Academy, USL Academy/USL Youth);</li>
+<li>is a founding or operating parent of such a program;</li>
+<li>is among the region's largest community clubs by 990 revenue;</li>
+<li>is a DC-based pro-affiliated youth pathway.</li>
+</ul>
+<p>Membership was drawn from league and club announcements, SoccerWire club pages, ClubScout guides and the MLS NEXT membership list. GotSport/PitchRank rankings were not systematically pulled, so this is a <strong>tier-and-size</strong> definition, not a ranking-based one. Alliances such as NVA and VDA are listed separately from their parent clubs because families pay the alliance program, but money flows through the parents' 990s.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Club</th>
+<th>Jurisdiction</th>
+<th>Why included</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>D.C. United Academy</td>
+<td>DC / Leesburg, VA</td>
+<td>MLS club academy (MLS NEXT)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>DC Power FC (academy contracts)</td>
+<td>DC</td>
+<td>USL Super League pro club signing DMV youth to academy contracts</td>
+</tr>
+<tr>
+<td>3</td>
+<td>DC Soccer Club (Stoddert Soccer League)</td>
+<td>DC</td>
+<td>Largest DC nonprofit; MLS NEXT Academy Division from 2026–27; ECNL RL</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Arlington Soccer Association</td>
+<td>Arlington, VA</td>
+<td>ECNL Boys/Girls, MLS NEXT; largest revenue in set</td>
+</tr>
+<tr>
+<td>5</td>
+<td>McLean Youth Soccer</td>
+<td>McLean, VA</td>
+<td>MLS NEXT, Girls Academy</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Alexandria Soccer Association</td>
+<td>Alexandria, VA</td>
+<td>MLS NEXT; large community club</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Loudoun Soccer (Loudoun Youth Soccer Assn.)</td>
+<td>Leesburg, VA</td>
+<td>MLS NEXT 2, Girls Academy; NVA partner</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Northern Virginia Alliance (NVA)</td>
+<td>Loudoun/Fairfax, VA</td>
+<td>ECNL, MLS NEXT, Girls Academy alliance</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Great Falls Reston SC</td>
+<td>Great Falls, VA</td>
+<td>NVA founding partner</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Virginia Development Academy (VDA)</td>
+<td>Woodbridge, VA</td>
+<td>ECNL Boys/Girls, USL Youth</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Prince William Soccer Inc.</td>
+<td>Woodbridge, VA</td>
+<td>VDA founding partner</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Fairfax Virginia Union (successor to Fairfax BRAVE)</td>
+<td>Fairfax, VA</td>
+<td>ECNL national club</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Braddock Road Youth Club</td>
+<td>Springfield, VA</td>
+<td>FVU/BRAVE founding partner</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Vienna Youth Soccer</td>
+<td>Vienna, VA</td>
+<td>FVU/BRAVE founding partner</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Lee Mount Vernon Sports Club</td>
+<td>Alexandria/Fairfax, VA</td>
+<td>FVU partner</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Springfield/South County Youth Club (SYC)</td>
+<td>Springfield, VA</td>
+<td>Girls Academy, GA Aspire; MLS NEXT 2 listing</td>
+</tr>
+<tr>
+<td>17</td>
+<td>The St. James FC</td>
+<td>Springfield, VA / Bethesda, MD</td>
+<td>MLS NEXT; for-profit sports complex operator</td>
+</tr>
+<tr>
+<td>18</td>
+<td>VA Revolution / Loudoun United FC</td>
+<td>Leesburg, VA</td>
+<td>MLS NEXT, Girls Academy; merged with USL Championship club</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Bethesda Soccer Club</td>
+<td>Bethesda/N. Potomac, MD</td>
+<td>MLS NEXT, ECNL</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Achilles FC (+ Achilles FC Foundation)</td>
+<td>Silver Spring, MD</td>
+<td>MLS NEXT charter club</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Montgomery Soccer Inc. (Maryland Rush Montgomery)</td>
+<td>Derwood, MD</td>
+<td>Large Montgomery County club</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Maryland United FC</td>
+<td>Bowie/Annapolis, MD</td>
+<td>USL Youth; large PG/Anne Arundel club</td>
+</tr>
+<tr>
+<td>23</td>
+<td>FC Frederick</td>
+<td>Frederick, MD</td>
+<td>Large Frederick County club</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Virginia Valor FC</td>
+<td>Chantilly, VA</td>
+<td>NVA and FVU partner</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Liverpool FC IA Maryland</td>
+<td>Rockville, MD</td>
+<td>National Academy League; international-brand academy</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="summary-table">Summary Table</h2>
+<p>"990?" means a 990 was located on ProPublica. "Fee public?" and "Aid public?" mean a schedule or policy was found on the club's own site during this research.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Club</th>
+<th>Entity type / tax status</th>
+<th>990 available? (latest FY: revenue)</th>
+<th>Fee schedule public?</th>
+<th>Financial-aid info public?</th>
+<th>Other disclosures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D.C. United Academy</td>
+<td>Division of D.C. United (private MLS club; entity not verified)</td>
+<td>No (for-profit)</td>
+<td>N/A: academy stated to be fully club-funded</td>
+<td>N/A</td>
+<td>Pathway-to-Pro partnerships with local clubs</td>
+</tr>
+<tr>
+<td>DC Power FC</td>
+<td>Private pro club (entity not verified)</td>
+<td>No</td>
+<td>No youth fees (academy contracts)</td>
+<td>N/A</td>
+<td>Press releases on academy signings</td>
+</tr>
+<tr>
+<td>DC Soccer Club / Stoddert</td>
+<td>501(c)(3), EIN 52-1340436</td>
+<td>Yes (FY Jul 2025: $4.87M)</td>
+<td>Partial (not verified)</td>
+<td>Yes: $250k–$350k per year awarded</td>
+<td>Aid committee independent of coaches</td>
+</tr>
+<tr>
+<td>Arlington Soccer Assn.</td>
+<td>501(c)(3), EIN 23-7284150</td>
+<td>Yes (FY Jun 2025: $10.89M)</td>
+<td>Yes (fee grid; 2023–24 amounts)</td>
+<td>Yes: detailed FPL-tiered policy, 60% cap</td>
+<td>Arlington Community Foundation listing; donations page</td>
+</tr>
+<tr>
+<td>McLean Youth Soccer</td>
+<td>501(c)(3), EIN 80-0015698</td>
+<td>Yes (FY Jun 2025: $3.58M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td>Candid profile</td>
+</tr>
+<tr>
+<td>Alexandria Soccer Assn.</td>
+<td>501(c)(3), EIN 54-0902413</td>
+<td>Yes (FY Jun 2025: $7.29M)</td>
+<td>Partial (all-inclusive tuition; amounts not verified)</td>
+<td>Yes: over $715k to 2,000+ participants</td>
+<td>"Where Does All the Money Go?" budget explainer; financial info link; conflict-of-interest form</td>
+</tr>
+<tr>
+<td>Loudoun Soccer</td>
+<td>501(c)(3), EIN 54-1076172</td>
+<td>Yes (FY May 2025: $7.84M)</td>
+<td>Yes (2025–26 Travel Financial Policy PDF; 2026/27 fees)</td>
+<td>Yes: $65,000 income threshold</td>
+<td>Refund policy</td>
+</tr>
+<tr>
+<td>Northern Virginia Alliance</td>
+<td>Alliance program; own EIN not found</td>
+<td>No (a similarly named Arlington league filer is likely unrelated)</td>
+<td>Not verified</td>
+<td>"Available" statement only</td>
+<td>Affiliate agreement (RBFC GA Aspire)</td>
+</tr>
+<tr>
+<td>Great Falls Reston SC</td>
+<td>501(c)(3), EIN 51-0226159</td>
+<td>Yes (FY Dec 2024: $2.77M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>VDA</td>
+<td>Alliance of PWSI + Virginia Soccer Assn.; own EIN not found</td>
+<td>No</td>
+<td>Yes (fee structure plus 2025–26 fee table)</td>
+<td>Yes: case-by-case, after $400 initial fee</td>
+<td>Financial Policy PDF</td>
+</tr>
+<tr>
+<td>Prince William Soccer Inc.</td>
+<td>501(c)(3), EIN 54-1101179</td>
+<td>Yes (FY Jun 2025: $4.64M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>Fairfax VA Union / BRAVE</td>
+<td>Six-club alliance; own EIN not found</td>
+<td>No</td>
+<td>Yes (fee structure page)</td>
+<td>Yes (program page)</td>
+<td>Governance statement (equal shares)</td>
+</tr>
+<tr>
+<td>Braddock Road YC</td>
+<td>501(c)(3), EIN 54-1015722</td>
+<td>Yes (FY Dec 2024: $3.14M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td>Schedule L related-party transactions reported</td>
+</tr>
+<tr>
+<td>Vienna Youth Soccer</td>
+<td>501(c)(3), EIN 54-1004923</td>
+<td>Yes (FY Jun 2025: $3.87M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>Lee Mount Vernon SC</td>
+<td>Nonprofit (990 not checked)</td>
+<td>Not checked</td>
+<td>Yes (deposit and payment plan)</td>
+<td>Yes: reduced $150 deposit; no cap on scholarships</td>
+<td>Sibling discount</td>
+</tr>
+<tr>
+<td>SYC</td>
+<td>501(c)(3), EIN 54-0938972</td>
+<td>Yes (FY Jun 2025: $5.23M)</td>
+<td>Not verified</td>
+<td>Yes: 30% travel scholarship; Fairfax County scholarship link</td>
+<td>Written confidentiality procedure</td>
+</tr>
+<tr>
+<td>The St. James FC</td>
+<td>For-profit (owned by The St. James complex; entity not verified)</td>
+<td>No</td>
+<td>Not found</td>
+<td>Not found (the school's aid is separate)</td>
+<td>Chelsea FC partnership marketing</td>
+</tr>
+<tr>
+<td>VA Revolution / Loudoun United</td>
+<td>Merged with privately owned USL club; legacy 501(c)(3) EIN 84-2902851 is stale</td>
+<td>Stale (FY2022: $16,967, 990-EZ)</td>
+<td>Partial (RSA school tuition $19,500)</td>
+<td>Limited ("quite limited" for the RSA school)</td>
+<td>Merger announcements</td>
+</tr>
+<tr>
+<td>Bethesda SC</td>
+<td>501(c)(3), EIN 52-1223186</td>
+<td>Yes (FY Aug 2025: $6.56M)</td>
+<td>Not verified</td>
+<td>Yes: policy, but no totals</td>
+<td>Scholarship fund sources disclosed</td>
+</tr>
+<tr>
+<td>Achilles FC</td>
+<td>Club entity not verified; Foundation described as 501(c)(3) (2018)</td>
+<td>Foundation not found on ProPublica</td>
+<td>Not found</td>
+<td>Stated (Foundation scholarships)</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>Montgomery Soccer Inc.</td>
+<td>501(c)(3), EIN 23-7327918</td>
+<td>Yes (FY Dec 2024: $4.49M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td>Legacy "Maryland Rush Montgomery" EIN also exists</td>
+</tr>
+<tr>
+<td>Maryland United FC</td>
+<td>501(c)(3), EIN 83-0574699</td>
+<td>Yes (FY Dec 2024: $3.59M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td>990 reports no paid officers</td>
+</tr>
+<tr>
+<td>FC Frederick</td>
+<td>501(c)(3), EIN 61-1441486</td>
+<td>Yes (FY Jun 2025: $3.31M)</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td>$1.09M contributions in 990</td>
+</tr>
+<tr>
+<td>Virginia Valor FC</td>
+<td>Not verified</td>
+<td>Not checked</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td class="num">—</td>
+</tr>
+<tr>
+<td>LFC IA Maryland</td>
+<td>Not verified (likely licensed private operator)</td>
+<td>Not checked</td>
+<td>Not verified</td>
+<td>Not verified</td>
+<td class="num">—</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="key-findings">Key Findings</h2>
+<h3><span class="code">1</span> Form 990 data: strong for community nonprofits, and it shows fee-dependence</h3>
+<p>The largest DMV clubs are multi-million-dollar organizations whose budgets rest almost entirely on family fees:</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Club (FY)</th>
+<th>Revenue</th>
+<th>Expenses</th>
+<th>Program-service (fee) share</th>
+<th>Contributions</th>
+<th>Top reported compensation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arlington (Jun 2025)</td>
+<td class="num">$10,890,449</td>
+<td class="num">$10,551,382</td>
+<td class="num">89.7%</td>
+<td class="num">$815,301 (7.5%)</td>
+<td>Mohamed Tayari, Dir. of Coaching, $177,557; ED Frank DeMarco $172,500</td>
+</tr>
+<tr>
+<td>Loudoun (May 2025)</td>
+<td class="num">$7,842,651</td>
+<td class="num">$8,940,229</td>
+<td class="num">not extracted</td>
+<td class="num">not extracted</td>
+<td>Mark Ryan, CEO, $237,993</td>
+</tr>
+<tr>
+<td>Alexandria (Jun 2025)</td>
+<td class="num">$7,286,737</td>
+<td class="num">$6,560,658</td>
+<td class="num">not extracted</td>
+<td class="num">not extracted</td>
+<td>Thomas Park, ED, $374,075 + $18,949 other</td>
+</tr>
+<tr>
+<td>Bethesda (Aug 2025)</td>
+<td class="num">$6,564,798</td>
+<td class="num">$6,928,501</td>
+<td class="num">88.8%</td>
+<td class="num">$327,987 (5.0%)</td>
+<td>Jonathon Colton, ED, $207,262</td>
+</tr>
+<tr>
+<td>SYC (Jun 2025)</td>
+<td class="num">$5,229,193</td>
+<td class="num">$4,884,054</td>
+<td class="num">not extracted</td>
+<td class="num">not extracted</td>
+<td>Dorothy Talbott, GM, $183,243 + $17,814</td>
+</tr>
+<tr>
+<td>Stoddert/DC Soccer Club (Jul 2025)</td>
+<td class="num">$4,870,669</td>
+<td class="num">$4,858,366</td>
+<td class="num">not extracted</td>
+<td class="num">not extracted</td>
+<td>Gregory Andrulis, ED, $170,000 + $5,400</td>
+</tr>
+<tr>
+<td>Prince William Soccer (Jun 2025)</td>
+<td class="num">$4,641,062</td>
+<td class="num">$4,155,749</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td>Quan Phan, ED, $112,997</td>
+</tr>
+<tr>
+<td>Montgomery Soccer (Dec 2024)</td>
+<td class="num">$4,488,877</td>
+<td class="num">$6,806,926</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td>Gus Delgado, ED, $205,000</td>
+</tr>
+<tr>
+<td>Vienna Youth Soccer (Jun 2025)</td>
+<td class="num">$3,868,248</td>
+<td class="num">$3,861,343</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td>Kevin James, ED, $177,528</td>
+</tr>
+<tr>
+<td>Maryland United FC (Dec 2024)</td>
+<td class="num">$3,591,749</td>
+<td class="num">$3,609,607</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td>No paid officers listed; $1,573,869 other salaries</td>
+</tr>
+<tr>
+<td>McLean (Jun 2025)</td>
+<td class="num">$3,579,252</td>
+<td class="num">$3,656,978</td>
+<td class="num">90.7%</td>
+<td class="num">$234,975 (6.6%)</td>
+<td>Louise Waxler, ED, $181,628 + $24,967</td>
+</tr>
+<tr>
+<td>FC Frederick (Jun 2025)</td>
+<td class="num">$3,311,564</td>
+<td class="num">$1,797,648</td>
+<td class="num">—</td>
+<td class="num">$1,094,808</td>
+<td>Robert Eskay, ED/VP, $128,640</td>
+</tr>
+<tr>
+<td>Braddock Road YC (Dec 2024)</td>
+<td class="num">$3,139,608</td>
+<td class="num">$2,558,416</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td>Michelle Dolansky, VP, $18,000</td>
+</tr>
+<tr>
+<td>Great Falls Reston (Dec 2024)</td>
+<td class="num">$2,774,491</td>
+<td class="num">$2,870,625</td>
+<td class="num">—</td>
+<td class="num">—</td>
+<td>Richard Shelton, ED, $140,000</td>
+</tr>
+</tbody>
+</table></div>
+<p>What this means for equity work:</p>
+<ul>
+<li><strong>Fee dependence.</strong> Where it was extracted, 88.8–90.7% of revenue comes from program fees and only 5–7.5% from contributions. Aid is therefore mostly cross-subsidized by paying families or capped by small donation pools, not funded by an endowment or public money. This structural fact explains why aid is rationed.</li>
+<li><strong>Deficits and reserves.</strong> Several clubs ran deficits in the latest year: Loudoun by about $1.1M, Montgomery Soccer by about $2.3M, Bethesda by $363,703, McLean by $77,726. McLean holds $4.24M in net assets against a $3.66M expense base, while Bethesda holds $1.17M. Reserve depth matters for whether aid can expand. The 990 alone does not explain large one-year deficits (capital projects, facility leases or timing are all possible), so Schedules D and O should be read before drawing conclusions.</li>
+<li><strong>Compensation outliers.</strong> Alexandria's ED pay of $374,075 is notably higher than peers ($170,000–$238,000 for top executives at clubs of similar or larger size). McLean's key-person compensation is 11.2% of expenses, against 1.6% at Arlington and 3.0% at Bethesda. These are legitimate governance data points, but role definitions differ (some clubs list coaching directors as key employees).</li>
+<li><strong>Anomalies to verify.</strong> Maryland United FC reports no compensated officers despite $1.57M in salaries. Braddock Road reports Schedule L (related-party) transactions. Both are worth reading in the full filing.</li>
+</ul>
+<h3><span class="code">2</span> Fee schedules: widely posted, but "total cost of play" is systematically understated</h3>
+<ul>
+<li><strong>Arlington</strong> publishes the most useful grid. Its 2023–24 financial-aid page lists club fees of $2,210 (U9–U12 travel), $2,050–$2,450 (U13–U19 travel tiers) and $3,000 (Academy/ECNL), plus team fees of $300–$800 collected on top. It also estimates out-of-pocket costs for cleats ($50–$200), warm-ups ($100) and backpacks ($70), and states fees exclude gas, hotels and meals. The current 2025–26 page describes the structure: a $300 non-refundable deposit, a 7-month payment plan, and a non-resident "pass-through" fee. Dollar amounts could not be extracted from that page, so the 2023–24 figures should be treated as dated.</li>
+<li><strong>VDA</strong> itemizes what its Club, Field and Team fees cover and publishes a 2025–26 ECNL fee table. The table's amounts could not be extracted in this research. VDA explicitly warns of costs outside club fees: uniforms "Generally $400–$500," family travel, and separately billed ECNL playoff costs.</li>
+<li><strong>Loudoun</strong> publishes a Travel Financial Policy PDF and 2026/27 fees, and markets "no hidden fees." Even so, it separates Club fees from Team fees (paid directly to the team for tournaments, coach travel and extra training) and a required uniform kit.</li>
+<li><strong>Fairfax Virginia Union</strong> and <strong>Lee Mount Vernon</strong> publish fee structures: FVU prorates 25% for mid-year joiners, and LMVSC charges a $250 deposit (or $150 for aid applicants) and offers an 8-month plan and a 10% sibling discount.</li>
+<li><strong>Alexandria</strong> says its Academy tuition is all-inclusive (coaching, league, tournaments, referees, field permits), with an $80–$90 Capelli uniform lasting about two years. This is a rare low-uniform-cost data point. The tuition amounts themselves were not verified.</li>
+<li><strong>For-profits and pro-affiliated programs</strong> publish the least about their club teams. VA Revolution's residency school (RSA) lists $19,500 per year in tuition, with club soccer billed separately. No St. James FC team fee schedule was found.</li>
+</ul>
+<p><strong>Implication:</strong> No club publishes a true all-in annual cost that includes team fees, uniforms, tournament travel and lodging. A database that captures only "club fee" will understate the cost of elite play, probably substantially for teams that travel nationally, though this could not be quantified from public sources.</p>
+<h3><span class="code">3</span> Financial aid: policies are public, outcomes almost never are</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Club</th>
+<th>Published rule</th>
+<th>Published outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arlington</td>
+<td>Tiered by federal poverty level: 1st priority at ≤130% FPL, then 185%, 250%, 300%; max award 60% of club fee; team fees and optional items not covered</td>
+<td>None. The club says that "Many years, this is the only group receiving financial aid" (≤130% FPL) "given the volume of requests"</td>
+</tr>
+<tr>
+<td>Loudoun</td>
+<td>2025–26 threshold of $65,000 gross family income (hardship considered); elite GA aid "for players identified who demonstrate talent, commitment, and need"; rec aid excludes add-on training</td>
+<td>None</td>
+</tr>
+<tr>
+<td>SYC</td>
+<td>Travel scholarship "standard" 30% of club fees (deposit excluded); county-scholarship recipients pay 30% of the travel fee. These two statements conflict (30% off vs. paying 30%); uniform and team fees are excluded</td>
+<td>None</td>
+</tr>
+<tr>
+<td>VDA</td>
+<td>Case-by-case; considered only after a $400 initial fee is paid</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Bethesda</td>
+<td>Limited, need-based; funded by contributions, camp and tournament proceeds; must already hold a roster spot and have paid a deposit</td>
+<td>None</td>
+</tr>
+<tr>
+<td>DC Soccer Club</td>
+<td>Committee independent of coaches; annual reapplication; covers uniforms</td>
+<td><strong>$250,000–$350,000 awarded per year</strong> across all eight wards</td>
+</tr>
+<tr>
+<td>Alexandria</td>
+<td>Rec aid tied to ACPS free/reduced lunch; Academy aid by inquiry</td>
+<td><strong>ASA's Spring2ACTion page: "Last year ASA supported over 2,000 participants with $715,000 in financial aid support."</strong> Other ASA figures differ: its Access4All page says "In 2022, ASA provided $750,000 in scholarship support to 2,500 participants," The Zebra (June 7, 2025) reported "2,929 participants with a total of $750,000," and its 2020 budget explainer reported over $450,000 to 1,500+ kids</td>
+</tr>
+<tr>
+<td>LMVSC</td>
+<td>No cap on number of scholarships</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Achilles FC Foundation</td>
+<td>Scholarships for low-income families</td>
+<td>None found</td>
+</tr>
+</tbody>
+</table></div>
+<p>Equity red flags visible in the policies themselves:</p>
+<ul>
+<li><strong>Deposit-before-aid rules.</strong> VDA requires $400 and Bethesda requires a deposit before aid is considered, which screens out the lowest-income families at the front door.</li>
+<li><strong>Percentage caps with uncovered team fees.</strong> Under Arlington's 60% cap, a maximum-aid Academy family still owed $1,670–$1,970 to the club in 2023–24, before travel.</li>
+<li><strong>Talent-conditioned aid</strong> at the elite tier (Loudoun GA).</li>
+<li><strong>Aid excluded from add-on training</strong>, which is often where development advantages accrue.</li>
+</ul>
+<p>Alexandria's aid totals are the strongest public evidence of scale. Its roughly $715,000 is on the order of one-tenth of its FY2025 revenue, though the aid figure is calendar 2025 and the revenue fiscal year ends June 2025, so the ratio is approximate. Virginia Senate Resolution SR603 (2022 session) states that ASA offers "financial aid to one in three participants, including $675,000 worth of aid in 2021 alone," which is the only participation-rate figure found for any club in the set. DC Soccer Club's range equals about 5–7% of its FY2025 revenue. Neither separates aid for elite (ECNL/MLS NEXT) teams from recreational aid.</p>
+<h3><span class="code">4</span> Annual reports, audits, budgets, board minutes</h3>
+<ul>
+<li><strong>Alexandria</strong> is the only club found publishing a budget explainer ("Where Does All the Money Go?", 2020), a financial-information link on its About page and a staff conflict-of-interest process.</li>
+<li>No club in the set was found posting audited financial statements, current budgets or board minutes. Those may exist behind member logins.</li>
+<li>ProPublica also hosts Single Audits for nonprofits spending $750,000 or more in federal funds. These were not checked club by club; given how little public money these clubs report, few if any are likely.</li>
+</ul>
+<h3><span class="code">5</span> Sponsorship, grants and public-funding disclosures</h3>
+<ul>
+<li><strong>Public-sector links are real but largely unquantified.</strong> Arlington travel teams train on fields allocated by Arlington County Parks and Recreation and accept the county's fee-reduction form as aid documentation. SYC routes families to the Fairfax County Department of Community and Recreation Services Youth Scholarship Program. Alexandria ties rec aid to ACPS lunch eligibility and has piloted free after-school leagues at Title 1 schools. VDA pays facility fees for Long &amp; Howison Park. Field-allocation value, which is effectively an in-kind public subsidy, is not disclosed by any club.</li>
+<li><strong>Philanthropy channels:</strong> Arlington (Arlington Community Foundation listing, Givebutter), Alexandria (Spring2ACTion), and Bethesda (scholarship donations). FC Frederick's $1.09M in contributions is unusually large and warrants a look at Schedule B/O for its source.</li>
+<li><strong>Pro and corporate partnerships:</strong><ul>
+<li>D.C. United's "Pathway-to-Pro" program with local clubs.</li>
+<li>D.C. United's minority stake in Loudoun United. According to Loudoun United FC's April 17, 2025 press release on the VA Revolution merger, "The partnership comprises Virginia Revolution, D.C. United, and Attain Sports, and will be managed by Virginia Revolution's principal owner, Jim Miller." Attain Sports &amp; Entertainment bought controlling ownership of Loudoun United on Feb 2, 2023.</li>
+<li>Arlington's partnership with Swansea City AFC.</li>
+<li>The St. James's partnership with Chelsea FC.</li>
+<li>Commercial sponsors are visible on club sites, such as a GoHealth banner on Arlington's fee page.</li>
+</ul>
+</li>
+</ul>
+<p>None of these partnerships disclose dollar terms.</p>
+<h3><span class="code">6</span> For-profit registrations (Maryland SDAT, Virginia SCC, DC DLCP)</h3>
+<p>These registry records could not be verified in this research. Entity names, formation dates and registered agents for D.C. United, DC Power FC, The St. James, Loudoun United/VA Revolution, Achilles FC and LFC IA Maryland should be pulled from:</p>
+<ul>
+<li>Virginia SCC's Clerk's Information System;</li>
+<li>Maryland SDAT's Business Entity Search;</li>
+<li>DC DLCP's CorpOnline.</li>
+</ul>
+<p>Note the practical limit: state registries in these jurisdictions disclose entity status and agents, not finances. Registration closes the "who owns this" gap but not the "what does it cost / where does money go" gap.</p>
+<h2 id="most-and-least-transparent">Most and Least Transparent</h2>
+<p class="label"><strong>Most transparent</strong></p>
+<ol>
+<li><strong>Arlington Soccer Association:</strong> current 990; full fee grid with aid math; FPL-based priority rules; candid admission that aid is rationed to the ≤130% FPL group.</li>
+<li><strong>Alexandria Soccer Association:</strong> current 990; published aid dollar and participant totals; budget explainer; conflict-of-interest process.</li>
+<li><strong>DC Soccer Club (Stoddert):</strong> current 990; published annual aid range; independent aid committee.</li>
+<li><strong>Loudoun Soccer:</strong> current 990; financial policy PDF; explicit income threshold.</li>
+</ol>
+<p class="label"><strong>Least transparent</strong></p>
+<ol>
+<li><strong>The St. James FC:</strong> for-profit; no 990; no team fee schedule or aid policy found.</li>
+<li><strong>Achilles FC:</strong> no club financials; the Foundation was not located on ProPublica, possibly because it files only a 990-N.</li>
+<li><strong>VA Revolution / Loudoun United:</strong> stale nonprofit filing (FY2022, $16,967); now tied to a privately owned pro club; only school tuition is published.</li>
+<li><strong>NVA, VDA and Fairfax Virginia Union:</strong> fees are public for VDA and FVU, but finances are split across parent-club 990s, so program-level economics are unobservable.</li>
+<li><strong>D.C. United Academy and DC Power FC</strong> are opaque financially but have little direct affordability concern. The academy is stated to be fully funded, and Power FC signs players to contracts. Here the equity questions are about <strong>who reaches them</strong> (feeder-club costs), not their fees.</li>
+</ol>
+<h2 id="data-gaps-and-feasibility-of-a-goal-equity-advisors-database">Data Gaps and Feasibility of a Goal Equity Advisors Database</h2>
+<p class="label"><strong>Feasible with high confidence (Tier 1, low cost):</strong></p>
+<ul>
+<li>990 financials for 14 nonprofits via ProPublica's API/XML or IRS TEOS: revenue, fee share, contributions, compensation, net assets and deficits. This is annual and fully reproducible.</li>
+</ul>
+<p class="label"><strong>Feasible with effort (Tier 2, seasonal scraping and manual coding):</strong></p>
+<ul>
+<li>Fee schedules and aid rules. Expect inconsistent formats (PDFs, PlayMetrics/LeagueApps checkout-only disclosures), dated pages (Arlington's grid is 2023–24), and missing team, uniform and travel costs.</li>
+<li>Build a standardized "published cost floor," and separately a modeled all-in cost using club-stated add-ons (for example, VDA's $400–$500 uniforms).</li>
+</ul>
+<p class="label"><strong>Not feasible from public sources (Tier 3, needs outreach or surveys):</strong></p>
+<ul>
+<li>Number and share of players on aid by tier.</li>
+<li>Aid dollars at the elite tier.</li>
+<li>Demographic and ZIP-code composition of rosters.</li>
+<li>Team-fee totals.</li>
+<li>For-profit finances.</li>
+<li>Value of public field allocations. This could be approached via county Parks and Recreation allocation records or FOIA requests, which is an untested but promising route.</li>
+</ul>
+<p class="label"><strong>Recommendations</strong></p>
+<ol>
+<li>Launch with a 990 panel of the 14 filers and publish standardized ratios: fee share of revenue, aid-proxy (where Schedule data allow), executive compensation per $1M of revenue, and reserve months.</li>
+<li>Create a uniform "Access Disclosure" request covering aid dollars, recipients by tier, deposit rules, team-fee ranges, and whether aid covers team fees and uniforms. Send it to all 25 clubs, and score clubs on response. Non-response is itself a transparency metric.</li>
+<li>Treat alliances (NVA, VDA, FVU) as the unit families experience, and request program-level P&amp;Ls from parent clubs.</li>
+<li>Pull SDAT, SCC and DLCP records for all for-profit and unverified entities before publication.</li>
+<li>Prioritize policy changes the data already supports: aid without deposit requirements, aid that covers team fees and uniforms, and published annual aid outcomes on the model of Alexandria and DC Soccer Club.</li>
+</ol>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>Several 990 figures (Loudoun, Alexandria, SYC, Stoddert, PWSI, Vienna, GFR, Braddock, Montgomery, Maryland United, FC Frederick) come from a research sub-pass of ProPublica summary pages. The underlying PDFs and XML were not opened, and the top-compensated person reflects only the first screen of listed people.</li>
+<li>The ProPublica record for Loudoun lists an exemption date of Nov 2024 despite filings back to 2010, which is likely an IRS master-file quirk.</li>
+<li>Montgomery Soccer Inc. has a separate legacy entity (Maryland Rush Montgomery Soccer Association, EIN 36-4544964) that is no longer on the IRS exempt list.</li>
+<li>990s for Lee Mount Vernon, Virginia Valor, and LFC IA Maryland were not checked. Fairfax Virginia Union was not searched by its own name in ProPublica.</li>
+<li>The "Northern Virginia Alliance League" 990 filer (EIN 52-1284397, $81,454 revenue) is probably not the NVA elite program.</li>
+<li>The D.C. United "fully funded" academy statement comes from a Sept 15, 2020 SoccerWire article, echoed by MLSsoccer.com, on D.C. United's plans for its "Under-15, Under-16, and Under-17 Academy youth teams for the 2020-21 season and moving forward, with all teams being fully-funded by the club." MLSsoccer.com added that "The club had previously been one of two MLS teams to charge a fee to play for its youth academy teams." Earlier Washington City Paper reporting found that "United charges its players an annual fee—between $1,500 and $2,500, depending on the age group," and Black And Red United (Aug 2015) named the Portland Timbers as the other fee-charging MLS club.</li>
+<li>League memberships change yearly (Fairfax BRAVE became Fairfax Virginia Union; DC Soccer Club enters MLS NEXT Academy Division in 2026–27). Club selection reflects 2025–26 information as found, not a ranking.</li>
+<li>Third-party club directories (ClubScout, PlayClubSoccer, YouthSoccerSports) were used only for context. They are aggregators and some list outdated or conflicting data.</li>
+</ul>
+</main>
+<footer>
+  <p>Goal Equity Advisors, Silver Spring, Maryland. Figures come from IRS Form 990 summaries on ProPublica Nonprofit Explorer and from clubs' own published pages; see Caveats for the limits of each.</p>
+</footer>
+</div>
