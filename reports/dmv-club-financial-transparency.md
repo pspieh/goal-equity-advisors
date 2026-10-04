@@ -23,7 +23,7 @@ Membership was drawn from league and club announcements, SoccerWire club pages, 
 |---|---|---|---|
 | 1 | D.C. United Academy | DC / Leesburg, VA | MLS club academy (MLS NEXT) |
 | 2 | DC Power FC (academy contracts) | DC | USL Super League pro club signing DMV youth to academy contracts |
-| 3 | DC Soccer Club (Stoddert Soccer League) | DC | Largest DC nonprofit; MLS NEXT Academy Division from 2026–27; ECNL RL |
+| 3 | DC Soccer Club (Stoddert Soccer League) | DC | Largest DC nonprofit; ECNL RL (does not offer MLS NEXT) |
 | 4 | Arlington Soccer Association | Arlington, VA | ECNL Boys/Girls, MLS NEXT; largest revenue in set |
 | 5 | McLean Youth Soccer | McLean, VA | MLS NEXT, Girls Academy |
 | 6 | Alexandria Soccer Association | Alexandria, VA | MLS NEXT; large community club |
@@ -209,5 +209,5 @@ Note the practical limit: state registries in these jurisdictions disclose entit
 - 990s for Lee Mount Vernon, Virginia Valor, and LFC IA Maryland were not checked. Fairfax Virginia Union was not searched by its own name in ProPublica.
 - The "Northern Virginia Alliance League" 990 filer (EIN 52-1284397, $81,454 revenue) is probably not the NVA elite program.
 - The D.C. United "fully funded" academy statement comes from a Sept 15, 2020 SoccerWire article, echoed by MLSsoccer.com, on D.C. United's plans for its "Under-15, Under-16, and Under-17 Academy youth teams for the 2020-21 season and moving forward, with all teams being fully-funded by the club." MLSsoccer.com added that "The club had previously been one of two MLS teams to charge a fee to play for its youth academy teams." Earlier Washington City Paper reporting found that "United charges its players an annual fee—between $1,500 and $2,500, depending on the age group," and Black And Red United (Aug 2015) named the Portland Timbers as the other fee-charging MLS club.
-- League memberships change yearly (Fairfax BRAVE became Fairfax Virginia Union; DC Soccer Club enters MLS NEXT Academy Division in 2026–27). Club selection reflects 2025–26 information as found, not a ranking.
+- League memberships change yearly (for example, Fairfax BRAVE became Fairfax Virginia Union). Club selection reflects 2025–26 information as found, not a ranking.
 - Third-party club directories (ClubScout, PlayClubSoccer, YouthSoccerSports) were used only for context. They are aggregators and some list outdated or conflicting data.
